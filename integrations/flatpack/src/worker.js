@@ -10,6 +10,8 @@ if (
   Array.isArray(input) ||
   input.schemaVersion !== REQUEST_SCHEMA ||
   typeof input.regionId !== "string" ||
+  input.regionId.length < 1 ||
+  input.regionId.length > 128 ||
   typeof input.sourceChecksum !== "string" ||
   !/^sha256:[a-f0-9]{64}$/.test(input.sourceChecksum) ||
   !Number.isSafeInteger(input.desktopWidthPx) ||

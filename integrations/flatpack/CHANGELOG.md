@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1] - 2026-10-09
+
+### Changed
+
+- Reject empty or overlong raster region IDs in the Worker, matching the
+  request schema while preserving plans for valid inputs.
+
 ## [1.4.0] - 2026-10-09
 
 ### Changed

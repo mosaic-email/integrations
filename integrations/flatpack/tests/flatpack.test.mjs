@@ -132,6 +132,13 @@ test("FlatPack Worker rejects invalid source checksums, missing inputs, and non-
   assert.throws(() => run(request, "flatpack.other_operation"), /UNKNOWN_OPERATION/u)
 })
 
+test("FlatPack Worker bounds region IDs to the request schema", () => {
+  const maxLength = "r".repeat(128)
+  assert.equal(run({ ...request, regionId: maxLength }).regionId, maxLength)
+  assert.throws(() => run({ ...request, regionId: "" }), /INVALID_INPUT/u)
+  assert.throws(() => run({ ...request, regionId: "r".repeat(129) }), /INVALID_INPUT/u)
+})
+
 test("source and distribution are identical and the Worker has no host escape surface", async () => {
   assert.equal(workerBundle, workerSource)
   for (const forbidden of [
@@ -148,6 +155,10 @@ test("source and distribution are identical and the Worker has no host escape su
   ])
     assert.equal(workerBundle.includes(forbidden), false, forbidden)
   const packageJson = await json("package.json")
+  const packageLock = await json("package-lock.json")
+  assert.equal(packageJson.version, release.version)
+  assert.equal(packageLock.version, release.version)
+  assert.equal(packageLock.packages[""].version, release.version)
   assert.equal(Object.keys(packageJson).includes("dependencies"), false)
   for (const path of ["src/worker.js", "dist/worker.js", "scripts/build-release.mjs"]) {
     const fileText = await readFile(new URL(path, root), "utf8")

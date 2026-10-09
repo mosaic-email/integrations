@@ -5,6 +5,7 @@ import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises"
 
 const packageRoot = resolve(fileURLToPath(new URL("../", import.meta.url)))
 const manifest = await readJson("mosaic-package.json")
+const packageJson = await readJson("package.json")
 const release = await readJson("mosaic-package-release.json")
 const support = await readJson("tests/fixtures/supported-host-contract.json")
 const artifactFiles = [
@@ -15,6 +16,7 @@ const artifactFiles = [
 ]
 
 if (
+  packageJson.version !== manifest.version ||
   manifest.version !== release.version ||
   release.schemaVersion !== support.releaseSchemaVersion ||
   release.hostContract !== support.hostContract ||

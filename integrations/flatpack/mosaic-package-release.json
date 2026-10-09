@@ -4,8 +4,8 @@
   "publisherKey": "lockidynamics",
   "packageKey": "flatpack",
   "catalogSlug": "flatpack",
-  "version": "1.4.0",
-  "releaseDigest": "sha256:f20c192734e30222006ee24cddcb24f40be1e747b88ea7e866520f949af31fde",
+  "version": "1.4.1",
+  "releaseDigest": "sha256:2a0fe8657c5f78b53a1c478088ab2823539278c5f6cba716f743d6baadbd4c54",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
     "minimumVersion": "0.0.3",
@@ -16,8 +16,8 @@
       "path": "dist/worker.js",
       "kind": "worker",
       "mediaType": "text/javascript",
-      "byteSize": 2360,
-      "digest": "sha256:9ca33f72e0fbf0f9ea23a033675ee273ea5a1079f8b1ce03b3c70eb0a93db117"
+      "byteSize": 2424,
+      "digest": "sha256:9545b19e1bbe79a116187a216092565e4e31e37ea778d53ea017e247d19a7cd8"
     },
     {
       "path": "schemas/flatpack.email_raster_source_v1.schema.json",

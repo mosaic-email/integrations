@@ -55,7 +55,7 @@ Screenshots can be added here as the customer-facing experience evolves:
 
 ## Learn more
 
-The FlatPack 1.4.0 candidate is maintained in this repository under
+The FlatPack 1.4.1 candidate is maintained in this repository under
 integrations/flatpack. It declares mosaic-package-host-v1, a minimum Mosaic
 version of 0.0.3, and compiler version 139. The release descriptor is checked
 against a pinned v3 host schema and records the exact Worker and schema bytes.
