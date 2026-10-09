@@ -1,0 +1,11 @@
+{
+  "name": "FlatPack",
+  "version": "1.4.0",
+  "description": "Package modules as flat assets.",
+  "homepage": "https://github.com/mosaic-email/integrations/tree/main/integrations/flatpack",
+  "logo": "logo.png",
+  "mosaicVersion": "0.0.3",
+  "slug": "flatpack",
+  "category": "email",
+  "color": "#0fa64a"
+}

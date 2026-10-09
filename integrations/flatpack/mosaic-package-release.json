@@ -1,0 +1,104 @@
+{
+  "$schema": "./schemas/mosaic-package-release-v3.schema.json",
+  "schemaVersion": "mosaic-package-release-v3",
+  "publisherKey": "lockidynamics",
+  "packageKey": "flatpack",
+  "catalogSlug": "flatpack",
+  "version": "1.4.0",
+  "releaseDigest": "sha256:f20c192734e30222006ee24cddcb24f40be1e747b88ea7e866520f949af31fde",
+  "hostContract": "mosaic-package-host-v1",
+  "mosaicCompatibility": {
+    "minimumVersion": "0.0.3",
+    "maximumVersion": null
+  },
+  "artifacts": [
+    {
+      "path": "dist/worker.js",
+      "kind": "worker",
+      "mediaType": "text/javascript",
+      "byteSize": 2360,
+      "digest": "sha256:9ca33f72e0fbf0f9ea23a033675ee273ea5a1079f8b1ce03b3c70eb0a93db117"
+    },
+    {
+      "path": "schemas/flatpack.email_raster_source_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 2485,
+      "digest": "sha256:954a97f29163c9ae6120b0946d1a212153f606745e5c8e9a49fc53b19acac1fd"
+    },
+    {
+      "path": "schemas/flatpack.email_raster_plan_request_v2.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 1169,
+      "digest": "sha256:f35f0df872c3d2db31b57bb99169226affe9481d7ec42c701f2f911d78ba39f2"
+    },
+    {
+      "path": "schemas/flatpack.email_raster_plan_v2.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 1167,
+      "digest": "sha256:e3ad17f98c00a13da6622fac42d9d039ab175ac178418891b28007de89101d78"
+    }
+  ],
+  "interfaces": {
+    "uiBridge": null,
+    "worker": {
+      "version": "mosaic-package-worker-v1",
+      "artifactPath": "dist/worker.js",
+      "operations": [
+        {
+          "id": "flatpack.rasterize_region",
+          "inputSchemaId": "flatpack.email_raster_plan_request_v2",
+          "resultSchemaId": "flatpack.email_raster_plan_v2"
+        }
+      ]
+    },
+    "data": {
+      "version": "mosaic-package-data-v1",
+      "sourceCodecIdentity": "flatpack-email-raster-source-v1",
+      "retainedSourceCodecIdentities": [],
+      "records": [],
+      "migrations": []
+    },
+    "connectorJobs": null
+  },
+  "capabilities": [
+    {
+      "schemaVersion": "mosaic-package-capabilities-v1",
+      "id": "flatpack.use",
+      "description": "Use FlatPack Email output behavior in a Library.",
+      "requestedScope": "library",
+      "requestedClassification": "standard"
+    }
+  ],
+  "contributions": [
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "flatpack.email_raster_region",
+      "kind": "email-raster-region",
+      "description": "Provide a bounded plan for rasterizing governed Email regions during authorized on-demand package export.",
+      "requiredCapabilityId": "flatpack.use",
+      "regionContract": "mosaic-email-raster-regions-v1",
+      "sourceSchemaId": "flatpack.email_raster_source_v1",
+      "operationId": "flatpack.rasterize_region",
+      "inputSchemaId": "flatpack.email_raster_plan_request_v2",
+      "resultSchemaId": "flatpack.email_raster_plan_v2",
+      "planContract": "mosaic-email-raster-plan-v2",
+      "authoring": {
+        "schemaVersion": "mosaic-email-raster-authoring-v1",
+        "label": "FlatPack",
+        "accent": "#0fa64a",
+        "icon": "image",
+        "controls": [
+          "link",
+          "alt"
+        ],
+        "brackets": true
+      }
+    }
+  ],
+  "compilerCompatibility": {
+    "minimumVersion": 139
+  }
+}
