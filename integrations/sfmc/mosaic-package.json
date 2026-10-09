@@ -1,0 +1,10 @@
+{
+  "name": "SFMC",
+  "version": "1.12.27",
+  "description": "Salesforce Marketing Cloud email output for Mosaic.",
+  "homepage": "https://github.com/mosaic-email/integrations/tree/main/integrations/sfmc",
+  "logo": "logo.png",
+  "mosaicVersion": "0.0.3",
+  "slug": "sfmc-format",
+  "category": "email"
+}

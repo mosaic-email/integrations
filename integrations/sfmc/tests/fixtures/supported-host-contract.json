@@ -1,0 +1,8 @@
+{
+  "hostContract": "mosaic-package-host-v1",
+  "releaseSchemaVersion": "mosaic-package-release-v3",
+  "workerInterface": "mosaic-package-worker-v1",
+  "minimumMosaicVersion": "0.0.3",
+  "minimumCompilerVersion": 140,
+  "previousBundledVersion": "1.12.26"
+}

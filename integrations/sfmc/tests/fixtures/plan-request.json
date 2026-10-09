@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "emailformat-sfmc-provider-plan-request-v1",
+  "sourceChecksum": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "emailId": "email_test",
+  "emailLibraryId": "library_test",
+  "purpose": "recipient-output",
+  "dynamicModuleEmission": true,
+  "profile": {
+    "schemaVersion": "emailformat-profile-v1",
+    "tokenCatalog": {
+      "delimiter": {
+        "id": "percent-pair",
+        "opener": "%%",
+        "closer": "%%",
+        "active": true
+      },
+      "entries": [
+        {
+          "rawToken": "%%emailaddr%%",
+          "friendlyName": "Email address"
+        },
+        {
+          "rawToken": "%%_subscriberkey%%",
+          "friendlyName": "Subscriber key"
+        }
+      ],
+      "authoredEmission": "inert-only"
+    },
+    "variableBinding": {
+      "syntax": "AttributeValue",
+      "attributeNamePattern": "^[A-Za-z_][A-Za-z0-9_.]{0,127}$",
+      "typedUsageTypes": [
+        "string"
+      ]
+    },
+    "moduleVariations": {
+      "conditionValueTypes": [
+        "text",
+        "number"
+      ],
+      "conditionOperators": [
+        "equals",
+        "not-equals",
+        "contains",
+        "not-contains",
+        "starts-with",
+        "ends-with",
+        "is-empty",
+        "is-not-empty",
+        "greater-than",
+        "greater-than-or-equal",
+        "less-than",
+        "less-than-or-equal"
+      ],
+      "conditionGroups": [
+        "and",
+        "or"
+      ],
+      "applicationScopes": [
+        "module"
+      ],
+      "outputSurfaces": [
+        "html",
+        "text"
+      ],
+      "fallbackBehaviors": [
+        "show",
+        "hide"
+      ],
+      "branchOrder": "saved-array-first-match",
+      "nestedSemantics": "ancestor-and"
+    },
+    "configurationCapabilities": [
+      "custom-head",
+      "custom-closing"
+    ],
+    "connectedOperations": [],
+    "diagnostics": [
+      "SFMC_RAW_PROVIDER_CODE_UNSUPPORTED",
+      "SFMC_TARGET_CONFIGURATION_STALE",
+      "SFMC_VARIABLE_BINDING_MISSING",
+      "PERSONALIZATION_SNAPSHOT_INVALID",
+      "PERSONALIZATION_CATALOG_INVALID",
+      "PERSONALIZATION_USAGE_DUPLICATE",
+      "PERSONALIZATION_USAGE_UNRESOLVED",
+      "PERSONALIZATION_USAGE_UNREFERENCED",
+      "PERSONALIZATION_DEFINITION_UNAVAILABLE",
+      "PERSONALIZATION_FALLBACK_INVALID",
+      "PERSONALIZATION_FORMATTING_UNSUPPORTED",
+      "PERSONALIZATION_PROFILE_INVALID"
+    ]
+  },
+  "modules": [
+    {
+      "instanceId": "module_hero",
+      "fallbackBehavior": "show",
+      "variations": [
+        {
+          "variationId": "variation_parent",
+          "segmentId": "segment_welcome",
+          "segmentName": "Welcome Offer",
+          "condition": {
+            "kind": "group",
+            "operator": "and",
+            "children": [
+              {
+                "kind": "comparison",
+                "id": "condition_country",
+                "binding": {
+                  "variableId": "var_country",
+                  "definitionVersion": 1,
+                  "bindingVersion": 1,
+                  "attributeName": "Country"
+                },
+                "operator": "equals",
+                "value": " US "
+              },
+              {
+                "kind": "comparison",
+                "id": "condition_age",
+                "binding": {
+                  "variableId": "var_age",
+                  "definitionVersion": 1,
+                  "bindingVersion": 1,
+                  "attributeName": "Age"
+                },
+                "operator": "greater-than-or-equal",
+                "value": "21"
+              }
+            ]
+          }
+        },
+        {
+          "variationId": "variation_child",
+          "parentVariationId": "variation_parent",
+          "segmentId": "segment_vip",
+          "segmentName": "VIP",
+          "condition": {
+            "kind": "comparison",
+            "id": "condition_tier",
+            "binding": {
+              "variableId": "var_tier",
+              "definitionVersion": 1,
+              "bindingVersion": 1,
+              "attributeName": "Tier"
+            },
+            "operator": "ends-with",
+            "value": " VIP "
+          }
+        }
+      ]
+    }
+  ],
+  "personalization": {
+    "valid": true,
+    "schemaVersion": "mosaic-email-personalization-input-v1",
+    "libraryId": "library_test",
+    "variables": [
+      {
+        "id": "var_country",
+        "status": "active",
+        "definitionCount": 1,
+        "bindings": [
+          {
+            "version": 1,
+            "definitionVersion": 1,
+            "attributeName": "Country"
+          }
+        ]
+      },
+      {
+        "id": "var_age",
+        "status": "active",
+        "definitionCount": 1,
+        "bindings": [
+          {
+            "version": 1,
+            "definitionVersion": 1,
+            "attributeName": "Age"
+          }
+        ]
+      },
+      {
+        "id": "var_tier",
+        "status": "active",
+        "definitionCount": 1,
+        "bindings": [
+          {
+            "version": 1,
+            "definitionVersion": 1,
+            "attributeName": "Tier"
+          }
+        ]
+      },
+      {
+        "id": "var_first_name",
+        "status": "active",
+        "definitionCount": 1,
+        "bindings": [
+          {
+            "version": 1,
+            "definitionVersion": 1,
+            "attributeName": null
+          }
+        ]
+      }
+    ]
+  },
+  "scalarUsages": [
+    {
+      "usageId": "usage_first_name",
+      "variableId": "var_first_name",
+      "definitionVersion": 1,
+      "bindingVersion": 1,
+      "fallback": "Friend"
+    },
+    {
+      "usageId": "usage_subject",
+      "variableId": "var_country",
+      "definitionVersion": 1,
+      "bindingVersion": 1,
+      "fallback": "Hello \"there\""
+    }
+  ],
+  "rasterRegions": [
+    {
+      "regionId": "region_hero",
+      "moduleInstanceIds": [
+        "module_hero"
+      ],
+      "states": [
+        {
+          "stateId": "state_default",
+          "selection": [
+            {
+              "moduleInstanceId": "module_hero",
+              "variationId": null
+            }
+          ]
+        },
+        {
+          "stateId": "state_welcome",
+          "selection": [
+            {
+              "moduleInstanceId": "module_hero",
+              "variationId": "variation_parent"
+            }
+          ]
+        },
+        {
+          "stateId": "state_vip",
+          "selection": [
+            {
+              "moduleInstanceId": "module_hero",
+              "variationId": "variation_child"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

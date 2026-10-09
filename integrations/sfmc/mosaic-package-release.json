@@ -1,0 +1,75 @@
+{
+  "$schema": "./schemas/mosaic-package-release-v3.schema.json",
+  "schemaVersion": "mosaic-package-release-v3",
+  "publisherKey": "lockidynamics",
+  "packageKey": "emailformat",
+  "catalogSlug": "sfmc-format",
+  "version": "1.12.27",
+  "releaseDigest": "sha256:aa0fbd3c1db83a059f089f399f7d73dbfdb23cb90443f94c51fe5ae047215bf8",
+  "hostContract": "mosaic-package-host-v1",
+  "mosaicCompatibility": {
+    "minimumVersion": "0.0.3",
+    "maximumVersion": null
+  },
+  "compilerCompatibility": {
+    "minimumVersion": 140
+  },
+  "artifacts": [
+    {
+      "path": "dist/worker.js",
+      "kind": "worker",
+      "mediaType": "text/javascript",
+      "byteSize": 29307,
+      "digest": "sha256:e0675a7bf54a20dc51cfd28bc1a4d874216d3d6441fb43c242fb1b98d9d27734"
+    },
+    {
+      "path": "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 19085,
+      "digest": "sha256:c322d7f07b1d0d8bf0ca7d31ab548a34120d5b047303f6ed7bbc28c4b2d96a3c"
+    },
+    {
+      "path": "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 6323,
+      "digest": "sha256:da2a45f7093e01daf8ab7b239418045e2bfd1a8445ac843e539edb1a4ce28225"
+    }
+  ],
+  "interfaces": {
+    "uiBridge": null,
+    "worker": {
+      "version": "mosaic-package-worker-v1",
+      "artifactPath": "dist/worker.js",
+      "operations": [
+        {
+          "id": "emailformat.compile_provider_plan",
+          "inputSchemaId": "emailformat.sfmc_provider_plan_request_v1",
+          "resultSchemaId": "emailformat.sfmc_provider_plan_result_v1"
+        }
+      ]
+    },
+    "data": {
+      "version": "mosaic-package-data-v1",
+      "sourceCodecIdentity": "emailformat-sfmc-provider-plan-source-v1",
+      "retainedSourceCodecIdentities": [],
+      "records": [],
+      "migrations": []
+    },
+    "connectorJobs": null
+  },
+  "capabilities": [],
+  "contributions": [
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.sfmc_provider_plan",
+      "kind": "output",
+      "description": "Build a bounded SFMC provider emission plan for host-owned deterministic Email compilation.",
+      "requiredCapabilityId": null,
+      "operationId": "emailformat.compile_provider_plan",
+      "inputSchemaId": "emailformat.sfmc_provider_plan_request_v1",
+      "resultSchemaId": "emailformat.sfmc_provider_plan_result_v1"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "sfmc-format-release",
+  "version": "1.12.27",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "build": "node scripts/build-release.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  }
+}

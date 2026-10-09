@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "providerId",
+    "sourceChecksum",
+    "profileSupported",
+    "conditionPreamble",
+    "conditionExpressions",
+    "scalarPreamble",
+    "scalarValues",
+    "bindingDiagnostics",
+    "scalarDiagnostics",
+    "rasterExpressions",
+    "branchSyntax",
+    "diagnosticTemplates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "emailformat-sfmc-provider-plan-result-v1"
+    },
+    "providerId": {
+      "const": "sfmc-format-provider-v1"
+    },
+    "sourceChecksum": {
+      "type": "string",
+      "minLength": 71,
+      "maxLength": 71
+    },
+    "profileSupported": {
+      "type": "boolean"
+    },
+    "conditionPreamble": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1000000
+    },
+    "conditionExpressions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "required": [
+          "moduleInstanceId",
+          "variationId",
+          "expression"
+        ],
+        "properties": {
+          "moduleInstanceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "variationId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "expression": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16384
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scalarPreamble": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1000000
+    },
+    "scalarValues": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "required": [
+          "usageId",
+          "value"
+        ],
+        "properties": {
+          "usageId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16384
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "bindingDiagnostics": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "severity",
+          "sourceId"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "severity": {
+            "enum": [
+              "error",
+              "warning"
+            ]
+          },
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scalarDiagnostics": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "severity",
+          "sourceId"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "severity": {
+            "enum": [
+              "error",
+              "warning"
+            ]
+          },
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "rasterExpressions": {
+      "type": "array",
+      "maxItems": 8192,
+      "items": {
+        "type": "object",
+        "required": [
+          "regionId",
+          "stateId",
+          "expression"
+        ],
+        "properties": {
+          "regionId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "stateId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expression": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16384
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "branchSyntax": {
+      "type": "object",
+      "required": [
+        "ifPrefix",
+        "elseifPrefix",
+        "suffix",
+        "elseBranch",
+        "endBranch"
+      ],
+      "properties": {
+        "ifPrefix": {
+          "const": "%%[ IF "
+        },
+        "elseifPrefix": {
+          "const": "%%[ ELSEIF "
+        },
+        "suffix": {
+          "const": " THEN ]%%"
+        },
+        "elseBranch": {
+          "const": "%%[ ELSE ]%%"
+        },
+        "endBranch": {
+          "const": "%%[ ENDIF ]%%"
+        }
+      },
+      "additionalProperties": false
+    },
+    "diagnosticTemplates": {
+      "type": "object",
+      "required": [
+        "invalidConfiguration",
+        "staleProfile"
+      ],
+      "properties": {
+        "invalidConfiguration": {
+          "type": "object",
+          "required": [
+            "code",
+            "message",
+            "severity"
+          ],
+          "properties": {
+            "code": {
+              "const": "SFMC_TARGET_CONFIGURATION_STALE"
+            },
+            "message": {
+              "const": "sfmc.target-configuration.invalid"
+            },
+            "severity": {
+              "const": "error"
+            }
+          },
+          "additionalProperties": false
+        },
+        "staleProfile": {
+          "type": "object",
+          "required": [
+            "code",
+            "message",
+            "severity"
+          ],
+          "properties": {
+            "code": {
+              "const": "SFMC_TARGET_CONFIGURATION_STALE"
+            },
+            "message": {
+              "const": "sfmc.target-configuration.invalid"
+            },
+            "severity": {
+              "const": "error"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

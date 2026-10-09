@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "emailformat-sfmc-provider-plan-result-v1",
+  "providerId": "sfmc-format-provider-v1",
+  "sourceChecksum": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "profileSupported": true,
+  "conditionPreamble": "%%[\nVAR @age_raw, @age, @age_ascii_accepted\nSET @age_raw = AttributeValue(\"Age\")\nSET @age = \"\"\nSET @age_ascii_accepted = 0\nIF Empty(@age_raw) THEN\nSET @age_ascii_accepted = 1\nELSEIF NOT Empty(RegExMatch(@age_raw, \"^[\\x00-\\x7F]+$\", 0)) THEN\nSET @age = Lowercase(Trim(@age_raw))\nSET @age_ascii_accepted = 1\nENDIF\nVAR @age_number, @age_numeric\nSET @age_number = 0\nSET @age_numeric = 0\nIF NOT Empty(RegExMatch(@age, \"^-?[0-9]{1,9}(\\.[0-9]{1,6})?$\", 0)) THEN\nSET @age_number = Add(@age, 0)\nSET @age_numeric = 1\nENDIF\nVAR @country_raw, @country, @country_ascii_accepted\nSET @country_raw = AttributeValue(\"Country\")\nSET @country = \"\"\nSET @country_ascii_accepted = 0\nIF Empty(@country_raw) THEN\nSET @country_ascii_accepted = 1\nELSEIF NOT Empty(RegExMatch(@country_raw, \"^[\\x00-\\x7F]+$\", 0)) THEN\nSET @country = Lowercase(Trim(@country_raw))\nSET @country_ascii_accepted = 1\nENDIF\nVAR @tier_raw, @tier, @tier_ascii_accepted\nSET @tier_raw = AttributeValue(\"Tier\")\nSET @tier = \"\"\nSET @tier_ascii_accepted = 0\nIF Empty(@tier_raw) THEN\nSET @tier_ascii_accepted = 1\nELSEIF NOT Empty(RegExMatch(@tier_raw, \"^[\\x00-\\x7F]+$\", 0)) THEN\nSET @tier = Lowercase(Trim(@tier_raw))\nSET @tier_ascii_accepted = 1\nENDIF\nVAR @vip\nSET @vip = 0\nIF (@tier_ascii_accepted == 1 AND NOT Empty(@tier) AND (Length(@tier) >= 3 AND IndexOf(Concat(\"~\", Substring(Concat(\"vip\", @tier), Add(Length(@tier), 1), 3)), Concat(\"~\", \"vip\")) == 1)) THEN\nSET @vip = 1\nENDIF\nVAR @welcome_offer\nSET @welcome_offer = 0\nIF ((@country_ascii_accepted == 1 AND NOT Empty(@country) AND (Length(@country) == 2 AND IndexOf(@country, \"us\") == 1)) AND (@age_numeric == 1 AND @age_number >= 21)) THEN\nSET @welcome_offer = 1\nENDIF\n]%%",
+  "conditionExpressions": [
+    {
+      "moduleInstanceId": "module_hero",
+      "variationId": "variation_parent",
+      "expression": "@welcome_offer == 1"
+    },
+    {
+      "moduleInstanceId": "module_hero",
+      "variationId": "variation_child",
+      "expression": "@vip == 1"
+    }
+  ],
+  "scalarPreamble": "%%[\nVAR @_mosaic_scalar_1\nSET @_mosaic_scalar_1 = \"Friend\"\nVAR @_mosaic_scalar_2\nSET @_mosaic_scalar_2 = AttributeValue(\"Country\")\nIF Empty(Trim(@_mosaic_scalar_2)) THEN\n  SET @_mosaic_scalar_2 = \"Hello \"\"there\"\"\"\nENDIF\n]%%",
+  "scalarValues": [
+    {
+      "usageId": "usage_first_name",
+      "value": "%%=v(@_mosaic_scalar_1)=%%"
+    },
+    {
+      "usageId": "usage_subject",
+      "value": "%%=v(@_mosaic_scalar_2)=%%"
+    }
+  ],
+  "bindingDiagnostics": [],
+  "scalarDiagnostics": [
+    {
+      "code": "SFMC_VARIABLE_BINDING_MISSING",
+      "message": "sfmc.variable.binding.missing",
+      "severity": "warning",
+      "sourceId": "usage_first_name"
+    }
+  ],
+  "rasterExpressions": [
+    {
+      "regionId": "region_hero",
+      "stateId": "state_default",
+      "expression": "(NOT (@welcome_offer == 1))"
+    },
+    {
+      "regionId": "region_hero",
+      "stateId": "state_welcome",
+      "expression": "((@welcome_offer == 1) AND NOT (@vip == 1))"
+    },
+    {
+      "regionId": "region_hero",
+      "stateId": "state_vip",
+      "expression": "((@welcome_offer == 1) AND (@vip == 1))"
+    }
+  ],
+  "branchSyntax": {
+    "ifPrefix": "%%[ IF ",
+    "elseifPrefix": "%%[ ELSEIF ",
+    "suffix": " THEN ]%%",
+    "elseBranch": "%%[ ELSE ]%%",
+    "endBranch": "%%[ ENDIF ]%%"
+  },
+  "diagnosticTemplates": {
+    "invalidConfiguration": {
+      "code": "SFMC_TARGET_CONFIGURATION_STALE",
+      "message": "sfmc.target-configuration.invalid",
+      "severity": "error"
+    },
+    "staleProfile": {
+      "code": "SFMC_TARGET_CONFIGURATION_STALE",
+      "message": "sfmc.target-configuration.invalid",
+      "severity": "error"
+    }
+  }
+}
