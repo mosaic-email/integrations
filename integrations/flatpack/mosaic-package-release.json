@@ -4,8 +4,8 @@
   "publisherKey": "lockidynamics",
   "packageKey": "flatpack",
   "catalogSlug": "flatpack",
-  "version": "1.4.1",
-  "releaseDigest": "sha256:2a0fe8657c5f78b53a1c478088ab2823539278c5f6cba716f743d6baadbd4c54",
+  "version": "1.4.2",
+  "releaseDigest": "sha256:8b37b2e8012dec212d08854ac46a3901232479390254ed4b1dbb38a70d3014ee",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
     "minimumVersion": "0.0.3",

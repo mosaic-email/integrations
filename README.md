@@ -12,7 +12,7 @@ Packages are independently versioned. Published versions and release dates are l
 
 | Package | Version | Last updated |
 | --- | --- | --- |
-| 📦 [**FlatPack**](integrations/flatpack/) | [1.4.1](https://github.com/mosaic-email/integrations/releases/tag/flatpack-v1.4.1) | 2026-10-09 |
+| 📦 [**FlatPack**](integrations/flatpack/) | [1.4.2](https://github.com/mosaic-email/integrations/releases/tag/flatpack-v1.4.2) | 2026-10-09 |
 
 ## Build an integration
 

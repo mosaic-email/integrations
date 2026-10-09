@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.2] - 2026-10-09
+
+### Changed
+
+- Reissue the unchanged FlatPack runtime under a new release identity.
+
 ## [1.4.1] - 2026-10-09
 
 ### Changed

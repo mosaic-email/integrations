@@ -43,7 +43,7 @@ Navigate to **Admin → Settings → Integrations** to install or manage FlatPac
 
 | | Version |
 |---|---|
-| FlatPack | `1.4.1` (Release Candidate) |
+| FlatPack | `1.4.2` |
 | Mosaic version | `≥0.0.3` |
 | Compiler version | `≥139` |
 
