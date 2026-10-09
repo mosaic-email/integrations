@@ -8,12 +8,11 @@
 
 ## Packages
 
-Packages are independently versioned. Published versions and release dates will
-appear here as integrations become available.
+Packages are independently versioned. Published versions and release dates are listed below.
 
 | Package | Version | Last updated |
 | --- | --- | --- |
-| 📦 **FlatPack** · Coming soon | — | — |
+| 📦 [**FlatPack**](integrations/flatpack/) | [1.4.1](https://github.com/mosaic-email/integrations/releases/tag/flatpack-v1.4.1) | 2026-10-09 |
 
 ## Build an integration
 
