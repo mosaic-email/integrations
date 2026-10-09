@@ -1,68 +1,49 @@
 <div align="center">
   <img src="logo.png" alt="FlatPack" width="180" />
   <h1>FlatPack</h1>
-  <p>Responsive visual assets for Mosaic Email.</p>
+  <p>Package modules as flat assets.</p>
 </div>
 
-FlatPack gives Mosaic authors a polished way to use responsive image treatments
-inside an Email without giving up the familiar Builder experience. It is made
-for campaigns that need art-directed desktop and mobile presentations, light
-and dark appearance variants, governed variations, links, and accessible image
-text.
+FlatPack transforms Mosaic modules into responsive images, giving you greater control over how your designs appear across email clients.
 
-## What you can do
+Create your content using Mosaic's drag-and-drop Builder, then convert individual modules or entire sections into flat PNG assets. Ideal for intricate layouts, branded campaigns, and creative designs where visual consistency matters.
 
-- Convert eligible Email modules into FlatPack visual assets.
-- Keep each variation’s image text and link settings independent when needed.
-- Preserve the module’s normal layout controls, including spacing, alignment,
-  colors, backgrounds, and rounding.
-- Include FlatPack modules in groups and continue editing the surrounding Email
-  normally.
-- Complete the Email to freeze Mosaic's canonical HTML for Preview and output.
-- Download an authorized FlatPack package with images generated for that
-  export.
-- Generate dark assets only when the Library's governed Dark Mode setting is
-  enabled.
+## Features
 
-## How it works in Mosaic
+- **Design in Mosaic.** Create and customize content using the familiar drag-and-drop Builder, including typography, spacing, colors, backgrounds, and rounded corners.
+- **Flatten modules or groups.** Convert individual modules or group adjacent modules together to create one seamless visual asset.
+- **Responsive assets.** Generate dedicated desktop and mobile images that preserve your intended layouts across screen sizes.
+- **Individual links.** Assign a destination URL to each FlatPack asset, allowing different sections of your email to link independently.
+- **Personalized variations.** Create distinct visual assets for different content variations, each with independent link and ALT text settings.
+- **Dark Mode support.** Generates both light and dark assets automatically when Dark Mode is enabled for your Mosaic Library.
 
-An administrator installs FlatPack and enables it for a Library. Authors use
-FlatPack-declared Link and ALT controls in the Mosaic-owned module properties
-panel and bracket rail. Complete validates the Email and freezes Mosaic's
-canonical HTML; Builder, Preview, and Review continue to use that HTML. When an
-authorized package export is requested, Mosaic applies FlatPack's bounded plan
-to the frozen source, renders the required PNGs, validates the result, and
-streams the ZIP. It regenerates PNGs on each export and does not retain
-historical generated image bytes. Source images remain governed Library assets.
+## How it works
 
-The package release supplies the raster-plan Worker and schemas. Mosaic owns
-authorization, rendering, source-resource access, output validation, and ZIP
-delivery. Regenerated PNG and ZIP bytes are not guaranteed to match across
-renderer or browser updates; the source version and release provenance remain
-the basis for each export.
+**1. Design your content**
 
-Catalog color: `#0fa64a`.
+Build your email using Mosaic's standard modules. Customize your layout, content, and styling as you normally would.
 
-## Screenshots
+**2. Enable FlatPack**
 
-Screenshots can be added here as the customer-facing experience evolves:
+Select an eligible module or group neighboring modules into a section. Enable FlatPack, then configure your link and ALT text using the module properties.
 
-<!--
-![FlatPack in the Email Builder](screenshots/builder.png)
-![FlatPack variation settings](screenshots/variation-settings.png)
-![FlatPack completed Email output](screenshots/completed-output.png)
--->
+**3. Complete and export**
 
-## Learn more
+Complete your email in Mosaic, then export your FlatPack package. Mosaic generates the required desktop and mobile PNG assets, including Dark Mode variants when enabled, and bundles them with your email output in a packaged ZIP.
 
-The FlatPack 1.4.1 candidate is maintained in this repository under
-integrations/flatpack. It declares mosaic-package-host-v1, a minimum Mosaic
-version of 0.0.3, and compiler version 139. The release descriptor is checked
-against a pinned v3 host schema and records the exact Worker and schema bytes.
+Mosaic does not host images generated using FlatPack.
 
-Run npm test from this directory to rebuild the Worker, verify the release
-descriptor and artifact digests, and prepare the files under .release-assets/.
-Mosaic still controls installation and Library enablement in **Admin → Settings →
-Integrations**. Updating an installation can require authors to rebind saved
-FlatPack regions before Review and Complete; existing completed output is not
-silently reinterpreted.
+## Getting started
+
+FlatPack is available to Libraries where an administrator has installed and enabled the integration.
+
+Navigate to **Admin → Settings → Integrations** to install or manage FlatPack. Once enabled, builders can use FlatPack directly within the Email Builder.
+
+## Compatibility
+
+| | Version |
+|---|---|
+| FlatPack | `1.4.1` (Release Candidate) |
+| Mosaic version | `≥0.0.3` |
+| Compiler version | `≥139` |
+
