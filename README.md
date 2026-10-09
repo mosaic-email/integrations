@@ -1,34 +1,38 @@
-# Mosaic Integrations
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/340272091?s=200&v=4" alt="Mosaic logo" width="100" height="100">
+</p>
 
-Official independently versioned ESP and third-party integrations for Mosaic,
-a Locki Dynamics LLC product. This repository is private.
+<h1 align="center">Mosaic Integrations</h1>
 
-## Repository boundary
+<p align="center">Official plug-ins and integrations for Mosaic.</p>
 
-Integration packages belong in `integrations/<integration-id>/`, each with its
-own version and release identity. FlatPack is the first planned migration;
-no integration has been implemented or migrated here yet.
+## Packages
 
-Mosaic's mandatory internal `packages/`, core `docs/`, compiler, governance,
-Review, and Complete authority remain in the core application repository.
-Use the core application's existing package and delivery contracts; this
-repository does not define a new host API.
+Packages are independently versioned. Published versions and release dates will
+appear here as integrations become available.
 
-## Development and releases
+| Package | Version | Last updated |
+| --- | --- | --- |
+| 📦 **FlatPack** · Coming soon | — | — |
 
-Read `AGENTS.md` before making changes. Add package-specific build and test
-commands when the first integration is migrated; no tooling is installed yet.
-Declare minimum supported Mosaic/compiler versions and required interface
-contracts. Pin exact package releases and digests independently of host versions.
+## Build an integration
 
-Do not commit credentials, customer data, generated release assets, or local
-configuration. Releases must use the core application's approved verification
-and immutable identity requirements. Publishing and migration require explicit
-scope and verification.
+Create a plug-in or integration that extends Mosaic, then submit it for review
+before inclusion in the official package catalog. Developer documentation and
+the submission process are coming soon.
 
-## Ownership
+| Developer resource | Status |
+| --- | --- |
+| Getting started | Coming soon |
+| Package structure and manifest | Coming soon |
+| Supported APIs and compatibility | Coming soon |
+| Security and testing requirements | Coming soon |
+| Submission and review guide | Coming soon |
 
-Mosaic is a Locki Dynamics LLC product.
-Copyright (c) 2026 Locki Dynamics LLC. All rights reserved.
-No open-source license is granted by this scaffold; distribution licensing must
-be approved before public release.
+These resources will be linked here when published. Community submissions are
+not open yet.
+
+---
+
+Mosaic is a Locki Dynamics LLC product.  
+Copyright © 2026 Locki Dynamics LLC. All rights reserved.
