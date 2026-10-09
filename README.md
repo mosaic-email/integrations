@@ -34,5 +34,6 @@ not open yet.
 
 ---
 
-Mosaic is a Locki Dynamics LLC product.  
+Mosaic is a Locki Dynamics LLC product.
+
 Copyright © 2026 Locki Dynamics LLC. All rights reserved.
