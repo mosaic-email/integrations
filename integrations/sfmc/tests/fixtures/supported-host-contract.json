@@ -4,5 +4,13 @@
   "workerInterface": "mosaic-package-worker-v1",
   "minimumMosaicVersion": "0.0.3",
   "minimumCompilerVersion": 140,
-  "previousBundledVersion": "1.12.26"
+  "previousBundledVersion": "1.12.26",
+  "previousExternalVersion": "1.12.27",
+  "previousExternalCompilerVersion": 140,
+  "previousExternalMosaicMinimumVersion": "0.0.3",
+  "previousExternalArtifactDigests": {
+    "dist/worker.js": "sha256:e0675a7bf54a20dc51cfd28bc1a4d874216d3d6441fb43c242fb1b98d9d27734",
+    "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json": "sha256:c322d7f07b1d0d8bf0ca7d31ab548a34120d5b047303f6ed7bbc28c4b2d96a3c",
+    "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json": "sha256:da2a45f7093e01daf8ab7b239418045e2bfd1a8445ac843e539edb1a4ce28225"
+  }
 }

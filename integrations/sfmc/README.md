@@ -12,7 +12,7 @@ The Worker receives only a bounded profile, module-variation conditions, raster 
 
 | | Version |
 |---|---|
-| SFMC package | `1.12.27` |
+| SFMC package | `1.12.28` |
 | Mosaic | `≥0.0.3` |
 | Compiler bridge | `≥140` |
 

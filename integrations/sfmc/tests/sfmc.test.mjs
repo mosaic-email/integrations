@@ -44,7 +44,7 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(release.publisherKey, "lockidynamics")
   assert.equal(release.packageKey, "emailformat")
   assert.equal(release.catalogSlug, "sfmc-format")
-  assert.equal(release.version, "1.12.27")
+  assert.equal(release.version, "1.12.28")
   assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
   assert.equal(release.compilerCompatibility.minimumVersion, support.minimumCompilerVersion)
   assert.equal(release.compilerCompatibility.minimumVersion, 140)
@@ -69,6 +69,15 @@ test("release descriptor matches pinned package identities and host compatibilit
     "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json",
   ])
   assert.ok(compareVersions(release.version, support.previousBundledVersion) > 0)
+  if (support.previousExternalVersion) {
+    assert.ok(compareVersions(release.version, support.previousExternalVersion) > 0)
+    assert.equal(release.compilerCompatibility.minimumVersion, support.previousExternalCompilerVersion)
+    assert.equal(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion)
+    assert.deepEqual(
+      Object.fromEntries(release.artifacts.map(({ path, digest }) => [path, digest])),
+      support.previousExternalArtifactDigests
+    )
+  }
 })
 
 test("release digest and declared package assets are exact", async () => {

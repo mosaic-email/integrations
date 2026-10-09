@@ -4,8 +4,8 @@
   "publisherKey": "lockidynamics",
   "packageKey": "emailformat",
   "catalogSlug": "sfmc-format",
-  "version": "1.12.27",
-  "releaseDigest": "sha256:aa0fbd3c1db83a059f089f399f7d73dbfdb23cb90443f94c51fe5ae047215bf8",
+  "version": "1.12.28",
+  "releaseDigest": "sha256:bc9f1a5da9b6e876525dcf63473d3347a6af6cba4e9cf8dde700c8e037cc313d",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
     "minimumVersion": "0.0.3",

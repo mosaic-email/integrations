@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.12.28] - 2026-10-09
+
+### Changed
+
+- Reissue the unchanged SFMC Worker, operation schemas, and compatibility floors under a new release identity.
+
 ## [1.12.27] - 2026-10-09
 
 ### Added
