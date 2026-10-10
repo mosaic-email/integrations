@@ -1,0 +1,17 @@
+{
+  "hostContract": "mosaic-package-host-v1",
+  "releaseSchemaVersion": "mosaic-package-release-v3",
+  "workerInterface": "mosaic-package-worker-v1",
+  "packageKey": "google_fonts",
+  "catalogSlug": "google-fonts",
+  "minimumPackageVersion": "1.1.0",
+  "minimumMosaicVersion": "0.0.3",
+  "minimumCompilerVersion": 141,
+  "sourceCodecIdentity": "google-font-source-v1",
+  "contributionId": "google_fonts.font_source",
+  "operationId": "google_fonts.parse_font_source",
+  "inputSchemaId": "google_fonts.parse_font_source_request_v1",
+  "resultSchemaId": "google_fonts.parse_font_source_result_v1",
+  "workerArtifactPath": "dist/worker.js"
+}
+

@@ -1,0 +1,4 @@
+.release-assets/
+node_modules/
+!dist/
+!dist/worker.js

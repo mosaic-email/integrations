@@ -1,0 +1,8 @@
+{
+  "version": "1.1.0",
+  "artifactDigests": {
+    "dist/worker.js": "sha256:ea16e5bb085561d1cc6ae7e523797f6a7e6f78cccf471990d087a6a8f95cfd73",
+    "schemas/google_fonts.parse_font_source_request_v1.schema.json": "sha256:98bac99b39f85ec50396c57b30dbb83848261d0bb217563d961a2da584639b96",
+    "schemas/google_fonts.parse_font_source_result_v1.schema.json": "sha256:a1d7be6fdf27bbf67e14b8690df2463e8d8f311b3f14d7d5953497d4edb3364e"
+  }
+}

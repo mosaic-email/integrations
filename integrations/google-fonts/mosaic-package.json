@@ -1,0 +1,11 @@
+{
+  "name": "Google Fonts",
+  "version": "1.1.0",
+  "description": "Bounded source parsing for Google Fonts imports in Mosaic.",
+  "homepage": "https://github.com/mosaic-email/integrations/tree/main/integrations/google-fonts",
+  "logo": "logo.png",
+  "mosaicVersion": "0.0.3",
+  "slug": "google-fonts",
+  "category": "email"
+}
+

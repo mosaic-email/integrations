@@ -1,0 +1,75 @@
+{
+  "$schema": "./schemas/mosaic-package-release-v3.schema.json",
+  "schemaVersion": "mosaic-package-release-v3",
+  "publisherKey": "lockidynamics",
+  "packageKey": "google_fonts",
+  "catalogSlug": "google-fonts",
+  "version": "1.1.0",
+  "releaseDigest": "sha256:d62be39ee9a64f5ec0b4a40218ef9d5ffadf7717b02c4df66c3c1dc91fd36366",
+  "hostContract": "mosaic-package-host-v1",
+  "mosaicCompatibility": {
+    "minimumVersion": "0.0.3",
+    "maximumVersion": null
+  },
+  "compilerCompatibility": {
+    "minimumVersion": 141
+  },
+  "artifacts": [
+    {
+      "path": "dist/worker.js",
+      "kind": "worker",
+      "mediaType": "text/javascript",
+      "byteSize": 10671,
+      "digest": "sha256:ea16e5bb085561d1cc6ae7e523797f6a7e6f78cccf471990d087a6a8f95cfd73"
+    },
+    {
+      "path": "schemas/google_fonts.parse_font_source_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 3315,
+      "digest": "sha256:98bac99b39f85ec50396c57b30dbb83848261d0bb217563d961a2da584639b96"
+    },
+    {
+      "path": "schemas/google_fonts.parse_font_source_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 3653,
+      "digest": "sha256:a1d7be6fdf27bbf67e14b8690df2463e8d8f311b3f14d7d5953497d4edb3364e"
+    }
+  ],
+  "interfaces": {
+    "uiBridge": null,
+    "worker": {
+      "version": "mosaic-package-worker-v1",
+      "artifactPath": "dist/worker.js",
+      "operations": [
+        {
+          "id": "google_fonts.parse_font_source",
+          "inputSchemaId": "google_fonts.parse_font_source_request_v1",
+          "resultSchemaId": "google_fonts.parse_font_source_result_v1"
+        }
+      ]
+    },
+    "data": {
+      "version": "mosaic-package-data-v1",
+      "sourceCodecIdentity": "google-font-source-v1",
+      "retainedSourceCodecIdentities": [],
+      "records": [],
+      "migrations": []
+    },
+    "connectorJobs": null
+  },
+  "capabilities": [],
+  "contributions": [
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "google_fonts.font_source",
+      "kind": "output",
+      "description": "Parse bounded Google Fonts source inputs for the host-owned font adapter.",
+      "requiredCapabilityId": null,
+      "operationId": "google_fonts.parse_font_source",
+      "inputSchemaId": "google_fonts.parse_font_source_request_v1",
+      "resultSchemaId": "google_fonts.parse_font_source_result_v1"
+    }
+  ]
+}
