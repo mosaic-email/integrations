@@ -8,7 +8,7 @@ Mosaic owns all network access. Its host fetches Fontsource metadata, requests C
 
 | | Version |
 | --- | --- |
-| Package | 1.1.0 |
+| Package | 1.1.1 |
 | Mosaic | 0.0.3 or later |
 | Compiler interface | 141 or later |
 

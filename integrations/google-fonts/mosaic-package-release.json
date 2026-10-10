@@ -4,8 +4,8 @@
   "publisherKey": "lockidynamics",
   "packageKey": "google_fonts",
   "catalogSlug": "google-fonts",
-  "version": "1.1.0",
-  "releaseDigest": "sha256:d62be39ee9a64f5ec0b4a40218ef9d5ffadf7717b02c4df66c3c1dc91fd36366",
+  "version": "1.1.1",
+  "releaseDigest": "sha256:ba093cedea5e92fc6cd04d5f1d4c53dec3291827aedbebb0a19e1560f98fe990",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
     "minimumVersion": "0.0.3",

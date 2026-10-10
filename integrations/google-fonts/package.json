@@ -1,6 +1,6 @@
 {
   "name": "google-fonts-release",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -14,4 +14,3 @@
     "ajv": "8.20.0"
   }
 }
-

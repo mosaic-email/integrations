@@ -13,7 +13,7 @@ Packages are independently versioned. Published versions and release dates are l
 | Package | Version | Last updated |
 | --- | --- | --- |
 | 📦 [**FlatPack**](integrations/flatpack/) | [1.4.2](https://github.com/mosaic-email/integrations/releases/tag/flatpack-v1.4.2) | 2026-10-09 |
-| 🔤 [**Google Fonts**](integrations/google-fonts/) | [1.1.0](https://github.com/mosaic-email/integrations/releases/tag/google-fonts-v1.1.0) | 2026-10-09 |
+| 🔤 [**Google Fonts**](integrations/google-fonts/) | [1.1.1](https://github.com/mosaic-email/integrations/releases/tag/google-fonts-v1.1.1) | 2026-10-09 |
 | ✉️ [**SFMC**](integrations/sfmc/) | [1.12.28](https://github.com/mosaic-email/integrations/releases/tag/sfmc-format-v1.12.28) | 2026-10-09 |
 
 ## Build an integration
