@@ -12,7 +12,32 @@ const artifactFiles = [
   ["dist/worker.js", "worker", "text/javascript"],
   ["schemas/emailformat.sfmc_provider_plan_request_v1.schema.json", "schema", "application/schema+json"],
   ["schemas/emailformat.sfmc_provider_plan_result_v1.schema.json", "schema", "application/schema+json"],
+  ...support.connectedOperations.flatMap(({ inputSchemaId, resultSchemaId }) => [
+    [`schemas/${inputSchemaId}.schema.json`, "schema", "application/schema+json"],
+    [`schemas/${resultSchemaId}.schema.json`, "schema", "application/schema+json"],
+  ]),
 ]
+const expectedConnectedOperationIds = [
+  "emailformat.verify_connection",
+  "emailformat.list_content_folders",
+  "emailformat.list_data_extensions",
+  "emailformat.list_data_extension_fields",
+  "emailformat.preview_recipient",
+  "emailformat.publish_completed_email",
+]
+const operationDeclarations = support.connectedOperations.map(
+  ({ id, inputSchemaId, resultSchemaId }) => ({ id, inputSchemaId, resultSchemaId })
+)
+const expectedContributions = support.connectedOperations.map(
+  ({ id, capability, inputSchemaId, resultSchemaId }) => ({
+    id,
+    kind: "connector-operation",
+    operationId: id,
+    inputSchemaId,
+    resultSchemaId,
+    requiredCapabilityId: capability,
+  })
+)
 
 if (
   packageJson.version !== manifest.version ||
@@ -20,7 +45,32 @@ if (
   release.schemaVersion !== support.releaseSchemaVersion ||
   release.hostContract !== support.hostContract ||
   release.mosaicCompatibility.minimumVersion !== support.minimumMosaicVersion ||
-  release.compilerCompatibility?.minimumVersion !== support.minimumCompilerVersion
+  release.compilerCompatibility?.minimumVersion !== support.minimumCompilerVersion ||
+  support.connectedOperations.length !== expectedConnectedOperationIds.length ||
+  support.connectedOperations.some(({ id }, index) => id !== expectedConnectedOperationIds[index]) ||
+  release.interfaces.connectorJobs?.version !== "mosaic-package-connector-job-v1" ||
+  canonicalJson(release.interfaces.connectorJobs.operations) !== canonicalJson(operationDeclarations) ||
+  canonicalJson(
+    release.capabilities.map(({ id, requestedScope, requestedClassification }) => ({
+      id,
+      requestedScope,
+      requestedClassification,
+    }))
+  ) !== canonicalJson(support.connectedCapabilities) ||
+  canonicalJson(
+    release.contributions.slice(1).map(
+      ({ id, kind, operationId, inputSchemaId, resultSchemaId, requiredCapabilityId }) => ({
+        id,
+        kind,
+        operationId,
+        inputSchemaId,
+        resultSchemaId,
+        requiredCapabilityId,
+      })
+    )
+  ) !== canonicalJson(expectedContributions) ||
+  release.contributions[0]?.id !== "emailformat.sfmc_provider_plan" ||
+  release.contributions[0]?.kind !== "output"
 )
   throw new Error("SFMC_RELEASE_SUPPORT_FIXTURE_MISMATCH")
 

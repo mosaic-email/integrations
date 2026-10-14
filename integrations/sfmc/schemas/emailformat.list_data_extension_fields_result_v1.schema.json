@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "type",
+          "maxLength",
+          "isPrimaryKey",
+          "isRequired",
+          "encrypted"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Boolean",
+              "Date",
+              "Decimal",
+              "EmailAddress",
+              "Locale",
+              "Number",
+              "Phone",
+              "Text"
+            ]
+          },
+          "maxLength": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 16384
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isPrimaryKey": {
+            "type": "boolean"
+          },
+          "isRequired": {
+            "type": "boolean"
+          },
+          "encrypted": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

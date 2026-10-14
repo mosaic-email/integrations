@@ -17,6 +17,13 @@ const support = await json("tests/fixtures/supported-host-contract.json")
 const hostSchema = await json("schemas/mosaic-package-release-v3.schema.json")
 const requestSchema = await json("schemas/emailformat.sfmc_provider_plan_request_v1.schema.json")
 const resultSchema = await json("schemas/emailformat.sfmc_provider_plan_result_v1.schema.json")
+const connectedSchemaEntries = await Promise.all(
+  support.connectedOperations.flatMap(async ({ inputSchemaId, resultSchemaId }) => [
+    [inputSchemaId, await json(`schemas/${inputSchemaId}.schema.json`)],
+    [resultSchemaId, await json(`schemas/${resultSchemaId}.schema.json`)],
+  ])
+)
+const connectedSchemas = new Map(connectedSchemaEntries.flat())
 const request = await json("tests/fixtures/plan-request.json")
 const expectedResult = await json("tests/fixtures/plan-result.json")
 
@@ -44,8 +51,9 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(release.publisherKey, "lockidynamics")
   assert.equal(release.packageKey, "emailformat")
   assert.equal(release.catalogSlug, "sfmc-format")
-  assert.equal(release.version, "1.12.28")
+  assert.equal(release.version, "1.13.0")
   assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
+  assert.ok(compareVersions(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion) > 0)
   assert.equal(release.compilerCompatibility.minimumVersion, support.minimumCompilerVersion)
   assert.equal(release.compilerCompatibility.minimumVersion, 140)
   assert.equal(manifest.name, "SFMC")
@@ -54,27 +62,55 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(manifest.mosaicVersion, release.mosaicCompatibility.minimumVersion)
   assert.equal(release.interfaces.worker.version, support.workerInterface)
   assert.equal(release.interfaces.worker.artifactPath, "dist/worker.js")
+  assert.equal(release.interfaces.worker.operations.length, 1)
   assert.equal(release.interfaces.worker.operations[0].id, "emailformat.compile_provider_plan")
   assert.equal(release.interfaces.worker.operations[0].inputSchemaId, "emailformat.sfmc_provider_plan_request_v1")
   assert.equal(release.interfaces.worker.operations[0].resultSchemaId, "emailformat.sfmc_provider_plan_result_v1")
-  assert.deepEqual(release.capabilities, [])
+  assert.deepEqual(
+    release.interfaces.connectorJobs.operations,
+    support.connectedOperations.map(({ id, inputSchemaId, resultSchemaId }) => ({ id, inputSchemaId, resultSchemaId }))
+  )
+  assert.deepEqual(
+    release.capabilities.map(({ id, requestedScope, requestedClassification }) => ({ id, requestedScope, requestedClassification })),
+    support.connectedCapabilities
+  )
   assert.equal(release.contributions[0].id, "emailformat.sfmc_provider_plan")
   assert.equal(release.contributions[0].kind, "output")
   assert.equal(release.contributions[0].requiredCapabilityId, null)
+  assert.deepEqual(
+    release.contributions.slice(1).map(({ id, kind, operationId, inputSchemaId, resultSchemaId, requiredCapabilityId }) => ({
+      id, kind, operationId, inputSchemaId, resultSchemaId, requiredCapabilityId,
+    })),
+    support.connectedOperations.map(({ id, capability, inputSchemaId, resultSchemaId }) => ({
+      id,
+      kind: "connector-operation",
+      operationId: id,
+      inputSchemaId,
+      resultSchemaId,
+      requiredCapabilityId: capability,
+    }))
+  )
   assert.deepEqual(release.interfaces.data.records, [])
   assert.deepEqual(release.interfaces.data.migrations, [])
   assert.deepEqual(release.artifacts.map(({ path }) => path), [
     "dist/worker.js",
     "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json",
     "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json",
+    ...support.connectedOperations.flatMap(({ inputSchemaId, resultSchemaId }) => [
+      `schemas/${inputSchemaId}.schema.json`,
+      `schemas/${resultSchemaId}.schema.json`,
+    ]),
   ])
+  assert.equal(release.artifacts.length, 15)
   assert.ok(compareVersions(release.version, support.previousBundledVersion) > 0)
   if (support.previousExternalVersion) {
     assert.ok(compareVersions(release.version, support.previousExternalVersion) > 0)
     assert.equal(release.compilerCompatibility.minimumVersion, support.previousExternalCompilerVersion)
-    assert.equal(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion)
+    assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
     assert.deepEqual(
-      Object.fromEntries(release.artifacts.map(({ path, digest }) => [path, digest])),
+      Object.fromEntries(release.artifacts
+        .filter(({ path }) => Object.hasOwn(support.previousExternalArtifactDigests, path))
+        .map(({ path, digest }) => [path, digest])),
       support.previousExternalArtifactDigests
     )
   }
@@ -107,6 +143,7 @@ test("operation schemas use only the supported bounded package-schema dialect", 
   for (const [name, schema] of [
     ["request", requestSchema],
     ["result", resultSchema],
+    ...connectedSchemas,
   ]) {
     let nodes = 0
     let maximumDepth = 0
@@ -128,6 +165,73 @@ test("operation schemas use only the supported bounded package-schema dialect", 
     assert.ok(nodes <= 2_000, name + " schema node count " + nodes)
     assert.ok(maximumDepth <= 24, name + " schema depth " + maximumDepth)
   }
+})
+
+test("connected operation schemas are closed, bounded, and separate host IDs from provider data", () => {
+  const samples = {
+    "emailformat.verify_connection": {
+      input: { libraryId: "a".repeat(32) },
+      result: { authenticated: true, mid: "123456789", scope: ["email_read", "email_write"] },
+    },
+    "emailformat.list_content_folders": {
+      input: { libraryId: "a".repeat(32) },
+      result: { folders: [{ id: 1, parentId: 0, name: "Content", path: "Content" }] },
+    },
+    "emailformat.list_data_extensions": {
+      input: { libraryId: "a".repeat(32) },
+      result: { dataExtensions: [{ customerKey: "customers", name: "Customers" }] },
+    },
+    "emailformat.list_data_extension_fields": {
+      input: { libraryId: "a".repeat(32), customerKey: "customers" },
+      result: { fields: [{ name: "EmailAddress", type: "EmailAddress", maxLength: 254, isPrimaryKey: true, isRequired: true, encrypted: false }] },
+    },
+    "emailformat.preview_recipient": {
+      input: { libraryId: "a".repeat(32), emailId: "b".repeat(32) },
+      result: { html: "<html><body>Synthetic preview</body></html>" },
+    },
+    "emailformat.publish_completed_email": {
+      input: {
+        libraryId: "a".repeat(32),
+        emailId: "b".repeat(32),
+        completionEvidenceId: "c".repeat(32),
+        requestId: "request-synthetic-1",
+      },
+      result: { publicationId: "publication-synthetic", status: "uploaded", assetId: 42 },
+    },
+  }
+
+  for (const operation of support.connectedOperations) {
+    const { input, result } = samples[operation.id]
+    const inputSchema = connectedSchemas.get(operation.inputSchemaId)
+    const resultSchema = connectedSchemas.get(operation.resultSchemaId)
+    assert.deepEqual(Object.keys(inputSchema.properties), Object.keys(input))
+    assert.deepEqual(inputSchema.required, Object.keys(input))
+    assert.equal(inputSchema.additionalProperties, false)
+    assert.equal(resultSchema.additionalProperties, false)
+    schemaValidator(inputSchema)(input)
+    schemaValidator(resultSchema)(result)
+    assert.throws(() => schemaValidator(inputSchema)({ ...input, accessToken: "synthetic-never-valid" }))
+    assert.throws(() => schemaValidator(resultSchema)({ ...result, rawRow: { synthetic: true } }))
+  }
+
+  const previewSchema = connectedSchemas.get("emailformat.preview_recipient_request_v1")
+  for (const forbidden of ["customerKey", "attributeName", "attributeValue", "row", "token"]) {
+    assert.equal(Object.hasOwn(previewSchema.properties, forbidden), false)
+    assert.throws(() => schemaValidator(previewSchema)({ ...samples["emailformat.preview_recipient"].input, [forbidden]: "synthetic" }))
+  }
+  const publishSchema = connectedSchemas.get("emailformat.publish_completed_email_request_v1")
+  assert.throws(() => schemaValidator(publishSchema)({
+    ...samples["emailformat.publish_completed_email"].input,
+    recipientRow: { synthetic: true },
+  }))
+  assert.throws(() => schemaValidator(publishSchema)({
+    ...samples["emailformat.publish_completed_email"].input,
+    requestId: "r".repeat(65),
+  }))
+  const fieldsSchema = connectedSchemas.get("emailformat.list_data_extension_fields_request_v1")
+  assert.throws(() => schemaValidator(fieldsSchema)({ libraryId: "a".repeat(32), customerKey: "k".repeat(129) }))
+  const verifySchema = connectedSchemas.get("emailformat.verify_connection_request_v1")
+  assert.throws(() => schemaValidator(verifySchema)({ libraryId: "a".repeat(31) }))
 })
 
 test("request fixture and Worker golden conform to their frozen schemas", () => {

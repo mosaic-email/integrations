@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0] - 2026-10-14
+
+### Added
+
+- Declare six Library-scoped SFMC Connector operations for connection verification, metadata discovery, recipient preview, and completed-Email publication, with closed bounded request/result schemas and explicit capability classifications.
+- Preserve the offline provider Worker and its two schemas byte-for-byte. Connected operations use Mosaic's trusted host dispatch; no credentials, tokens, recipient-row keys or values, or raw provider rows are exposed to the Package Worker.
+
 ## [1.12.28] - 2026-10-09
 
 ### Changed

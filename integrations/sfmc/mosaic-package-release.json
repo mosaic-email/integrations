@@ -4,11 +4,11 @@
   "publisherKey": "lockidynamics",
   "packageKey": "emailformat",
   "catalogSlug": "sfmc-format",
-  "version": "1.12.28",
-  "releaseDigest": "sha256:bc9f1a5da9b6e876525dcf63473d3347a6af6cba4e9cf8dde700c8e037cc313d",
+  "version": "1.13.0",
+  "releaseDigest": "sha256:11cff5158fd8ecf15d5bb9cd115bad87596b92125793ea743c80224cb9632039",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
-    "minimumVersion": "0.0.3",
+    "minimumVersion": "0.0.4",
     "maximumVersion": null
   },
   "compilerCompatibility": {
@@ -35,6 +35,90 @@
       "mediaType": "application/schema+json",
       "byteSize": 6323,
       "digest": "sha256:da2a45f7093e01daf8ab7b239418045e2bfd1a8445ac843e539edb1a4ce28225"
+    },
+    {
+      "path": "schemas/emailformat.verify_connection_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 271,
+      "digest": "sha256:d2beebab0495b643c2f8bf3546dd58286ed9c2f77fc203cd33c105eab732f8de"
+    },
+    {
+      "path": "schemas/emailformat.verify_connection_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 513,
+      "digest": "sha256:f0c0644e3433478a0ec7284cc6ccdafd9a949f5f42c439944601265859eccb16"
+    },
+    {
+      "path": "schemas/emailformat.list_content_folders_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 271,
+      "digest": "sha256:d2beebab0495b643c2f8bf3546dd58286ed9c2f77fc203cd33c105eab732f8de"
+    },
+    {
+      "path": "schemas/emailformat.list_content_folders_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 965,
+      "digest": "sha256:14273470c6d747efcc1ca1caa092937c6842f535d08d845e55c999165f6f9d95"
+    },
+    {
+      "path": "schemas/emailformat.list_data_extensions_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 271,
+      "digest": "sha256:d2beebab0495b643c2f8bf3546dd58286ed9c2f77fc203cd33c105eab732f8de"
+    },
+    {
+      "path": "schemas/emailformat.list_data_extensions_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 704,
+      "digest": "sha256:799f612ee58dfe24d98b0d7f2b572edfa841d66fe0791237e3a1a80ec1ca0e4e"
+    },
+    {
+      "path": "schemas/emailformat.list_data_extension_fields_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 387,
+      "digest": "sha256:349a87b8f61d7889aecf16ddb4066aa933270d8d58be0bdd6e1fc62d33e35f67"
+    },
+    {
+      "path": "schemas/emailformat.list_data_extension_fields_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 1420,
+      "digest": "sha256:de58c96abd1a5e5fcaa60f67c0d874b634c704402af754ebca72f7e645c8ffb9"
+    },
+    {
+      "path": "schemas/emailformat.preview_recipient_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 379,
+      "digest": "sha256:877e18d9cf45fc1b77439e32e8ebaeb1a7453cf36ac49662dd1286a0a8fdfa1a"
+    },
+    {
+      "path": "schemas/emailformat.preview_recipient_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 265,
+      "digest": "sha256:ff33f64dfc78e8acafa7f3c6959231a6fe5282197bc9e02e4e81488dbb71c63e"
+    },
+    {
+      "path": "schemas/emailformat.publish_completed_email_request_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 624,
+      "digest": "sha256:56d4512b8f79e6ddab7c609f32672d954f0f64386cf0af62a158e6bf0cdadcb8"
+    },
+    {
+      "path": "schemas/emailformat.publish_completed_email_result_v1.schema.json",
+      "kind": "schema",
+      "mediaType": "application/schema+json",
+      "byteSize": 599,
+      "digest": "sha256:03115f0331422f9577345277917cfbc055ebf11f0bc71357a6fbdf95db40c5f4"
     }
   ],
   "interfaces": {
@@ -57,9 +141,65 @@
       "records": [],
       "migrations": []
     },
-    "connectorJobs": null
+    "connectorJobs": {
+      "version": "mosaic-package-connector-job-v1",
+      "operations": [
+        {
+          "id": "emailformat.verify_connection",
+          "inputSchemaId": "emailformat.verify_connection_request_v1",
+          "resultSchemaId": "emailformat.verify_connection_result_v1"
+        },
+        {
+          "id": "emailformat.list_content_folders",
+          "inputSchemaId": "emailformat.list_content_folders_request_v1",
+          "resultSchemaId": "emailformat.list_content_folders_result_v1"
+        },
+        {
+          "id": "emailformat.list_data_extensions",
+          "inputSchemaId": "emailformat.list_data_extensions_request_v1",
+          "resultSchemaId": "emailformat.list_data_extensions_result_v1"
+        },
+        {
+          "id": "emailformat.list_data_extension_fields",
+          "inputSchemaId": "emailformat.list_data_extension_fields_request_v1",
+          "resultSchemaId": "emailformat.list_data_extension_fields_result_v1"
+        },
+        {
+          "id": "emailformat.preview_recipient",
+          "inputSchemaId": "emailformat.preview_recipient_request_v1",
+          "resultSchemaId": "emailformat.preview_recipient_result_v1"
+        },
+        {
+          "id": "emailformat.publish_completed_email",
+          "inputSchemaId": "emailformat.publish_completed_email_request_v1",
+          "resultSchemaId": "emailformat.publish_completed_email_result_v1"
+        }
+      ]
+    }
   },
-  "capabilities": [],
+  "capabilities": [
+    {
+      "schemaVersion": "mosaic-package-capabilities-v1",
+      "id": "emailformat.metadata_read",
+      "requestedScope": "library",
+      "requestedClassification": "standard",
+      "description": "Read approved SFMC connection and metadata within this Library."
+    },
+    {
+      "schemaVersion": "mosaic-package-capabilities-v1",
+      "id": "emailformat.recipient_preview",
+      "requestedScope": "library",
+      "requestedClassification": "privileged",
+      "description": "Preview one authorized completed Email for an approved recipient context."
+    },
+    {
+      "schemaVersion": "mosaic-package-capabilities-v1",
+      "id": "emailformat.publish",
+      "requestedScope": "library",
+      "requestedClassification": "privileged",
+      "description": "Publish the exact authorized completed Email artifact to SFMC."
+    }
+  ],
   "contributions": [
     {
       "schemaVersion": "mosaic-package-contributions-v1",
@@ -70,6 +210,66 @@
       "operationId": "emailformat.compile_provider_plan",
       "inputSchemaId": "emailformat.sfmc_provider_plan_request_v1",
       "resultSchemaId": "emailformat.sfmc_provider_plan_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.verify_connection",
+      "kind": "connector-operation",
+      "description": "Verify the configured SFMC connection and its approved Business Unit scope.",
+      "requiredCapabilityId": "emailformat.metadata_read",
+      "operationId": "emailformat.verify_connection",
+      "inputSchemaId": "emailformat.verify_connection_request_v1",
+      "resultSchemaId": "emailformat.verify_connection_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.list_content_folders",
+      "kind": "connector-operation",
+      "description": "List bounded Content Builder folders available to the configured Business Unit.",
+      "requiredCapabilityId": "emailformat.metadata_read",
+      "operationId": "emailformat.list_content_folders",
+      "inputSchemaId": "emailformat.list_content_folders_request_v1",
+      "resultSchemaId": "emailformat.list_content_folders_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.list_data_extensions",
+      "kind": "connector-operation",
+      "description": "List approved Data Extension metadata without returning record values.",
+      "requiredCapabilityId": "emailformat.metadata_read",
+      "operationId": "emailformat.list_data_extensions",
+      "inputSchemaId": "emailformat.list_data_extensions_request_v1",
+      "resultSchemaId": "emailformat.list_data_extensions_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.list_data_extension_fields",
+      "kind": "connector-operation",
+      "description": "List bounded field metadata for one approved Data Extension.",
+      "requiredCapabilityId": "emailformat.metadata_read",
+      "operationId": "emailformat.list_data_extension_fields",
+      "inputSchemaId": "emailformat.list_data_extension_fields_request_v1",
+      "resultSchemaId": "emailformat.list_data_extension_fields_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.preview_recipient",
+      "kind": "connector-operation",
+      "description": "Preview an authorized completed Email using a host-resolved recipient context.",
+      "requiredCapabilityId": "emailformat.recipient_preview",
+      "operationId": "emailformat.preview_recipient",
+      "inputSchemaId": "emailformat.preview_recipient_request_v1",
+      "resultSchemaId": "emailformat.preview_recipient_result_v1"
+    },
+    {
+      "schemaVersion": "mosaic-package-contributions-v1",
+      "id": "emailformat.publish_completed_email",
+      "kind": "connector-operation",
+      "description": "Publish an exact completed Email artifact after host-side evidence and authorization checks.",
+      "requiredCapabilityId": "emailformat.publish",
+      "operationId": "emailformat.publish_completed_email",
+      "inputSchemaId": "emailformat.publish_completed_email_request_v1",
+      "resultSchemaId": "emailformat.publish_completed_email_result_v1"
     }
   ]
 }

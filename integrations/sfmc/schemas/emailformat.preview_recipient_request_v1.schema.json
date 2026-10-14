@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "libraryId",
+    "emailId"
+  ],
+  "properties": {
+    "libraryId": {
+      "type": "string",
+      "minLength": 32,
+      "maxLength": 32
+    },
+    "emailId": {
+      "type": "string",
+      "minLength": 32,
+      "maxLength": 32
+    }
+  }
+}

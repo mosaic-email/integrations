@@ -2,7 +2,7 @@
   "hostContract": "mosaic-package-host-v1",
   "releaseSchemaVersion": "mosaic-package-release-v3",
   "workerInterface": "mosaic-package-worker-v1",
-  "minimumMosaicVersion": "0.0.3",
+  "minimumMosaicVersion": "0.0.4",
   "minimumCompilerVersion": 140,
   "previousBundledVersion": "1.12.26",
   "previousExternalVersion": "1.12.27",
@@ -12,5 +12,48 @@
     "dist/worker.js": "sha256:e0675a7bf54a20dc51cfd28bc1a4d874216d3d6441fb43c242fb1b98d9d27734",
     "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json": "sha256:c322d7f07b1d0d8bf0ca7d31ab548a34120d5b047303f6ed7bbc28c4b2d96a3c",
     "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json": "sha256:da2a45f7093e01daf8ab7b239418045e2bfd1a8445ac843e539edb1a4ce28225"
-  }
+  },
+  "connectedCapabilities": [
+    { "id": "emailformat.metadata_read", "requestedScope": "library", "requestedClassification": "standard" },
+    { "id": "emailformat.recipient_preview", "requestedScope": "library", "requestedClassification": "privileged" },
+    { "id": "emailformat.publish", "requestedScope": "library", "requestedClassification": "privileged" }
+  ],
+  "connectedOperations": [
+    {
+      "id": "emailformat.verify_connection",
+      "capability": "emailformat.metadata_read",
+      "inputSchemaId": "emailformat.verify_connection_request_v1",
+      "resultSchemaId": "emailformat.verify_connection_result_v1"
+    },
+    {
+      "id": "emailformat.list_content_folders",
+      "capability": "emailformat.metadata_read",
+      "inputSchemaId": "emailformat.list_content_folders_request_v1",
+      "resultSchemaId": "emailformat.list_content_folders_result_v1"
+    },
+    {
+      "id": "emailformat.list_data_extensions",
+      "capability": "emailformat.metadata_read",
+      "inputSchemaId": "emailformat.list_data_extensions_request_v1",
+      "resultSchemaId": "emailformat.list_data_extensions_result_v1"
+    },
+    {
+      "id": "emailformat.list_data_extension_fields",
+      "capability": "emailformat.metadata_read",
+      "inputSchemaId": "emailformat.list_data_extension_fields_request_v1",
+      "resultSchemaId": "emailformat.list_data_extension_fields_result_v1"
+    },
+    {
+      "id": "emailformat.preview_recipient",
+      "capability": "emailformat.recipient_preview",
+      "inputSchemaId": "emailformat.preview_recipient_request_v1",
+      "resultSchemaId": "emailformat.preview_recipient_result_v1"
+    },
+    {
+      "id": "emailformat.publish_completed_email",
+      "capability": "emailformat.publish",
+      "inputSchemaId": "emailformat.publish_completed_email_request_v1",
+      "resultSchemaId": "emailformat.publish_completed_email_result_v1"
+    }
+  ]
 }
