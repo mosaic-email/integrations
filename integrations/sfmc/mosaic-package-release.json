@@ -4,11 +4,11 @@
   "publisherKey": "lockidynamics",
   "packageKey": "emailformat",
   "catalogSlug": "sfmc-format",
-  "version": "1.13.0",
-  "releaseDigest": "sha256:11cff5158fd8ecf15d5bb9cd115bad87596b92125793ea743c80224cb9632039",
+  "version": "1.14.0",
+  "releaseDigest": "sha256:08a5b449c6d95193952506dc8e94cc98f0af8061286f0a99fbd24757fa461d15",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
-    "minimumVersion": "0.0.4",
+    "minimumVersion": "0.0.5",
     "maximumVersion": null
   },
   "compilerCompatibility": {
@@ -61,8 +61,8 @@
       "path": "schemas/emailformat.list_content_folders_result_v1.schema.json",
       "kind": "schema",
       "mediaType": "application/schema+json",
-      "byteSize": 965,
-      "digest": "sha256:14273470c6d747efcc1ca1caa092937c6842f535d08d845e55c999165f6f9d95"
+      "byteSize": 1301,
+      "digest": "sha256:41f554656b33b1d272b0edb9179d42b1eea337fa2bed5e1c727d1596da7052d5"
     },
     {
       "path": "schemas/emailformat.list_data_extensions_request_v1.schema.json",
@@ -75,22 +75,22 @@
       "path": "schemas/emailformat.list_data_extensions_result_v1.schema.json",
       "kind": "schema",
       "mediaType": "application/schema+json",
-      "byteSize": 704,
-      "digest": "sha256:799f612ee58dfe24d98b0d7f2b572edfa841d66fe0791237e3a1a80ec1ca0e4e"
+      "byteSize": 2906,
+      "digest": "sha256:1189823bd9e0ab176ea6357827e172f7f13f309cf5a4bbc710f31fedb21bdcd2"
     },
     {
       "path": "schemas/emailformat.list_data_extension_fields_request_v1.schema.json",
       "kind": "schema",
       "mediaType": "application/schema+json",
-      "byteSize": 387,
-      "digest": "sha256:349a87b8f61d7889aecf16ddb4066aa933270d8d58be0bdd6e1fc62d33e35f67"
+      "byteSize": 491,
+      "digest": "sha256:38262c8e6bb4f1493c9cf9a08957a49e88429cd076d70f27f396688e3b8f381a"
     },
     {
       "path": "schemas/emailformat.list_data_extension_fields_result_v1.schema.json",
       "kind": "schema",
       "mediaType": "application/schema+json",
-      "byteSize": 1420,
-      "digest": "sha256:de58c96abd1a5e5fcaa60f67c0d874b634c704402af754ebca72f7e645c8ffb9"
+      "byteSize": 1617,
+      "digest": "sha256:f3f5af54c1c2e5c02c5880ce4a5e6a6744777505c6e7a14cda0795de54b063f6"
     },
     {
       "path": "schemas/emailformat.preview_recipient_request_v1.schema.json",

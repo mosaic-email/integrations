@@ -26,7 +26,107 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 512
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "local",
+              "shared"
+            ]
+          },
+          "ownerMid": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "folderId": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "objectId": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            ]
+          },
+          "isSendable": {
+            "type": "boolean"
           }
+        }
+      }
+    },
+    "folders": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "parentId",
+          "name",
+          "path"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "parentId": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8500
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "local",
+              "shared"
+            ]
+          },
+          "ownerMid": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "sharedStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "available"
+      ],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
         }
       }
     }

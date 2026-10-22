@@ -38,6 +38,21 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 8500
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "local",
+              "shared"
+            ]
+          },
+          "ownerMid": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "writable": {
+            "type": "boolean"
           }
         }
       }

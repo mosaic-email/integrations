@@ -51,7 +51,7 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(release.publisherKey, "lockidynamics")
   assert.equal(release.packageKey, "emailformat")
   assert.equal(release.catalogSlug, "sfmc-format")
-  assert.equal(release.version, "1.13.0")
+  assert.equal(release.version, "1.14.0")
   assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
   assert.ok(compareVersions(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion) > 0)
   assert.equal(release.compilerCompatibility.minimumVersion, support.minimumCompilerVersion)
@@ -204,7 +204,7 @@ test("connected operation schemas are closed, bounded, and separate host IDs fro
     const { input, result } = samples[operation.id]
     const inputSchema = connectedSchemas.get(operation.inputSchemaId)
     const resultSchema = connectedSchemas.get(operation.resultSchemaId)
-    assert.deepEqual(Object.keys(inputSchema.properties), Object.keys(input))
+    assert.deepEqual(Object.keys(inputSchema.properties), operation.id === "emailformat.list_data_extension_fields" ? [...Object.keys(input), "scope"] : Object.keys(input))
     assert.deepEqual(inputSchema.required, Object.keys(input))
     assert.equal(inputSchema.additionalProperties, false)
     assert.equal(resultSchema.additionalProperties, false)
@@ -399,3 +399,13 @@ function compareVersions(left, right) {
   }
   return 0
 }
+
+
+test("shared connector metadata carries scope/owner without granting caller-selected Enterprise authority", () => {
+  const fields=connectedSchemas.get("emailformat.list_data_extension_fields_request_v1")
+  schemaValidator(fields)({libraryId:"a".repeat(32),customerKey:"shared-key",scope:"shared"})
+  assert.throws(()=>schemaValidator(fields)({libraryId:"a".repeat(32),customerKey:"shared-key",scope:"enterprise"}))
+  assert.throws(()=>schemaValidator(fields)({libraryId:"a".repeat(32),customerKey:"shared-key",scope:"shared",ownerMid:"999"}))
+  schemaValidator(connectedSchemas.get("emailformat.list_content_folders_result_v1"))({folders:[{id:1,parentId:0,name:"Shared Content",path:"Shared Content",scope:"shared",ownerMid:"999",writable:true}]})
+  schemaValidator(connectedSchemas.get("emailformat.list_data_extensions_result_v1"))({dataExtensions:[{customerKey:"shared-key",name:"Shared",scope:"shared",ownerMid:"999",folderId:1,objectId:null,isSendable:false}],sharedStatus:{available:true}})
+})

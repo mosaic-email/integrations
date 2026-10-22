@@ -1,3 +1,9 @@
+# 1.14.0
+
+- Adds local/shared ownership metadata for Content Builder folders and Data Extensions. Requires Mosaic 0.0.5.
+- Shared Content Builder uses the child MID. Enterprise shared DE metadata requires Library Admin opt-in and Enterprise BU access on the Installed Package; Mosaic resolves and verifies the Enterprise MID. Recipient rows remain separately authorized.
+- Preserves offline provider-plan output and historical artifacts.
+
 # Changelog
 
 ## [1.13.0] - 2026-10-14
