@@ -1,3 +1,9 @@
+# 1.15.0
+
+- Declare a bounded native system-token emission list for email address, subscriber key, and Additional Email Attributes 1–5. Unknown provider tokens remain unsupported.
+- Require compiler bridge 160 for host-side validation and rendering of exact native-token nodes. The Worker still receives no authored Email content and does not render provider tokens.
+- Preserve the previous inert-only profile and all historical package outputs.
+
 # 1.14.0
 
 - Adds local/shared ownership metadata for Content Builder folders and Data Extensions. Requires Mosaic 0.0.5.

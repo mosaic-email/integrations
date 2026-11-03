@@ -12,11 +12,17 @@ The offline Worker receives only a bounded profile, module-variation conditions,
 
 | | Version |
 |---|---|
-| SFMC package | `1.14.0` |
+| SFMC package | `1.15.0` |
 | Mosaic | `≥0.0.5` |
-| Compiler bridge | `≥140` |
+| Compiler bridge | `≥160` |
 
-The compiler bridge floor remains 140 because this release preserves the existing provider-plan operation. Mosaic 0.0.4 is the first host floor for the declared connected-operation contract.
+This release adds the explicit native system-token profile contract and requires compiler bridge 160. Mosaic 0.0.4 is the first host floor for the declared connected-operation contract.
+
+The host may preserve only the fixed native system-token names declared by this
+release. The Worker validates that bounded profile list but does not receive
+authored Email content or render tokens. Mosaic continues to own source
+validation, placement checks, output rendering and final artifact safety. The
+previous `inert-only` profile remains supported for compatibility.
 
 The release declares four Library-scoped metadata operations (connection verification, Content Builder folders, Data Extensions, and Data Extension fields), a privileged recipient preview, and a privileged publication operation for a completed Email. Preview and publish inputs carry only Mosaic IDs; the host resolves authoritative completed output, recipient selection, Library binding, BU, and installed credentials. These declarations require matching host dispatch and capability enforcement; the package declaration alone does not execute network operations.
 

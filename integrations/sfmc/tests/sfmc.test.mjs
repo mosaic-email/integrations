@@ -51,11 +51,11 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(release.publisherKey, "lockidynamics")
   assert.equal(release.packageKey, "emailformat")
   assert.equal(release.catalogSlug, "sfmc-format")
-  assert.equal(release.version, "1.14.0")
+  assert.equal(release.version, "1.15.0")
   assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
-  assert.ok(compareVersions(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion) > 0)
+  assert.ok(compareVersions(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion) >= 0)
   assert.equal(release.compilerCompatibility.minimumVersion, support.minimumCompilerVersion)
-  assert.equal(release.compilerCompatibility.minimumVersion, 140)
+  assert.equal(release.compilerCompatibility.minimumVersion, 160)
   assert.equal(manifest.name, "SFMC")
   assert.equal(manifest.slug, release.catalogSlug)
   assert.equal(manifest.version, release.version)
@@ -105,13 +105,39 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.ok(compareVersions(release.version, support.previousBundledVersion) > 0)
   if (support.previousExternalVersion) {
     assert.ok(compareVersions(release.version, support.previousExternalVersion) > 0)
-    assert.equal(release.compilerCompatibility.minimumVersion, support.previousExternalCompilerVersion)
+    assert.ok(release.compilerCompatibility.minimumVersion > support.previousExternalCompilerVersion)
     assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
+    const newlyVersionedArtifacts = new Set([
+      "dist/worker.js",
+      "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json",
+    ])
+    assert.notEqual(
+      release.artifacts.find(({ path }) => path === "dist/worker.js").digest,
+      support.previousExternalArtifactDigests["dist/worker.js"]
+    )
+    assert.notEqual(
+      release.artifacts.find(({ path }) =>
+        path === "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json"
+      ).digest,
+      support.previousExternalArtifactDigests[
+        "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json"
+      ]
+    )
     assert.deepEqual(
-      Object.fromEntries(release.artifacts
-        .filter(({ path }) => Object.hasOwn(support.previousExternalArtifactDigests, path))
-        .map(({ path, digest }) => [path, digest])),
-      support.previousExternalArtifactDigests
+      Object.fromEntries(
+        release.artifacts
+          .filter(
+            ({ path }) =>
+              Object.hasOwn(support.previousExternalArtifactDigests, path) &&
+              !newlyVersionedArtifacts.has(path)
+          )
+          .map(({ path, digest }) => [path, digest])
+      ),
+      Object.fromEntries(
+        Object.entries(support.previousExternalArtifactDigests).filter(
+          ([path]) => !newlyVersionedArtifacts.has(path)
+        )
+      )
     )
   }
 })
@@ -273,6 +299,28 @@ test("Worker owns profile support, scalar mapping, variation aliases, and raster
     elseBranch: "%%[ ELSE ]%%",
     endBranch: "%%[ ENDIF ]%%",
   })
+})
+
+test("Worker supports legacy inert profiles and only the declared native system token set", () => {
+  const legacy = structuredClone(request)
+  legacy.profile.tokenCatalog.authoredEmission = "inert-only"
+  delete legacy.profile.tokenCatalog.nativeEmissionTokens
+  assert.equal(run(legacy).profileSupported, true)
+
+  const mismatched = structuredClone(request)
+  mismatched.profile.tokenCatalog.authoredEmission = "inert-only"
+  assert.equal(run(mismatched).profileSupported, false)
+
+  const duplicate = structuredClone(request)
+  duplicate.profile.tokenCatalog.nativeEmissionTokens.push(
+    duplicate.profile.tokenCatalog.nativeEmissionTokens[0]
+  )
+  assert.equal(run(duplicate).profileSupported, false)
+
+  const unknown = structuredClone(request)
+  unknown.profile.tokenCatalog.nativeEmissionTokens[0] = "%%ArbitraryAttribute%%"
+  assert.equal(run(unknown).profileSupported, false)
+  assert.throws(() => schemaValidator(requestSchema)(unknown))
 })
 
 test("invalid or stale pinned catalog mappings return keyed diagnostics without host output", () => {

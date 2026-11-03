@@ -22,9 +22,38 @@
         {
           "rawToken": "%%_subscriberkey%%",
           "friendlyName": "Subscriber key"
+          },
+          {
+            "rawToken": "%%__AdditionalEmailAttribute1%%",
+            "friendlyName": "Additional Email Attribute 1"
+          },
+          {
+            "rawToken": "%%__AdditionalEmailAttribute2%%",
+            "friendlyName": "Additional Email Attribute 2"
+          },
+          {
+            "rawToken": "%%__AdditionalEmailAttribute3%%",
+            "friendlyName": "Additional Email Attribute 3"
+          },
+          {
+            "rawToken": "%%__AdditionalEmailAttribute4%%",
+            "friendlyName": "Additional Email Attribute 4"
+          },
+          {
+            "rawToken": "%%__AdditionalEmailAttribute5%%",
+            "friendlyName": "Additional Email Attribute 5"
         }
       ],
-      "authoredEmission": "inert-only"
+        "authoredEmission": "allowlisted-native-tokens",
+        "nativeEmissionTokens": [
+          "%%emailaddr%%",
+          "%%_subscriberkey%%",
+          "%%__AdditionalEmailAttribute1%%",
+          "%%__AdditionalEmailAttribute2%%",
+          "%%__AdditionalEmailAttribute3%%",
+          "%%__AdditionalEmailAttribute4%%",
+          "%%__AdditionalEmailAttribute5%%"
+        ]
     },
     "variableBinding": {
       "syntax": "AttributeValue",

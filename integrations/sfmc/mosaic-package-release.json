@@ -4,30 +4,30 @@
   "publisherKey": "lockidynamics",
   "packageKey": "emailformat",
   "catalogSlug": "sfmc-format",
-  "version": "1.14.0",
-  "releaseDigest": "sha256:08a5b449c6d95193952506dc8e94cc98f0af8061286f0a99fbd24757fa461d15",
+  "version": "1.15.0",
+  "releaseDigest": "sha256:81754743854b12d36b5daaa3bd33d9f04da4a20e967a7295c7204160fdbfe5aa",
   "hostContract": "mosaic-package-host-v1",
   "mosaicCompatibility": {
     "minimumVersion": "0.0.5",
     "maximumVersion": null
   },
   "compilerCompatibility": {
-    "minimumVersion": 140
+    "minimumVersion": 160
   },
   "artifacts": [
     {
       "path": "dist/worker.js",
       "kind": "worker",
       "mediaType": "text/javascript",
-      "byteSize": 29307,
-      "digest": "sha256:e0675a7bf54a20dc51cfd28bc1a4d874216d3d6441fb43c242fb1b98d9d27734"
+      "byteSize": 30296,
+      "digest": "sha256:6bafc8aa8abfada84e35df7e472306046b2dabcf5279b8ec0e75fc2e5153fe21"
     },
     {
       "path": "schemas/emailformat.sfmc_provider_plan_request_v1.schema.json",
       "kind": "schema",
       "mediaType": "application/schema+json",
-      "byteSize": 19085,
-      "digest": "sha256:c322d7f07b1d0d8bf0ca7d31ab548a34120d5b047303f6ed7bbc28c4b2d96a3c"
+      "byteSize": 19729,
+      "digest": "sha256:945a3b3791a91d43c00daee2c10a3ee40b1ba2ce364874c17f2b481e91558e61"
     },
     {
       "path": "schemas/emailformat.sfmc_provider_plan_result_v1.schema.json",

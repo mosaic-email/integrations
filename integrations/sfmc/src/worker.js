@@ -18,6 +18,15 @@ const CONDITION_OPERATORS = [
   "less-than",
   "less-than-or-equal",
 ]
+const NATIVE_SYSTEM_TOKENS = new Set([
+  "%%emailaddr%%",
+  "%%_subscriberkey%%",
+  "%%__AdditionalEmailAttribute1%%",
+  "%%__AdditionalEmailAttribute2%%",
+  "%%__AdditionalEmailAttribute3%%",
+  "%%__AdditionalEmailAttribute4%%",
+  "%%__AdditionalEmailAttribute5%%",
+])
 const STALE_PROFILE_DIAGNOSTIC = {
   code: "SFMC_TARGET_CONFIGURATION_STALE",
   message: "sfmc.target-configuration.invalid",
@@ -293,6 +302,22 @@ function profileSupports(profile, modules) {
   try {
     const operators = new Set(profile.moduleVariations.conditionOperators)
     const groups = new Set(profile.moduleVariations.conditionGroups)
+    const catalogTokens = new Set(
+      profile.tokenCatalog.entries.map(({ rawToken }) => rawToken)
+    )
+    const nativeEmissionTokens = profile.tokenCatalog.nativeEmissionTokens
+    const nativeEmissionSupported =
+      profile.tokenCatalog.authoredEmission === "inert-only"
+        ? nativeEmissionTokens === undefined
+        : profile.tokenCatalog.authoredEmission ===
+            "allowlisted-native-tokens" &&
+          Array.isArray(nativeEmissionTokens) &&
+          nativeEmissionTokens.length > 0 &&
+          new Set(nativeEmissionTokens).size === nativeEmissionTokens.length &&
+          nativeEmissionTokens.every(
+            (rawToken) =>
+              NATIVE_SYSTEM_TOKENS.has(rawToken) && catalogTokens.has(rawToken)
+          )
     const visit = (condition) =>
       condition.kind === "group"
         ? groups.has(condition.operator) && condition.children.every(visit)
@@ -310,7 +335,7 @@ function profileSupports(profile, modules) {
       profile.variableBinding.attributeNamePattern === ATTRIBUTE_PATTERN &&
       profile.configurationCapabilities.includes("custom-head") &&
       profile.configurationCapabilities.includes("custom-closing") &&
-      profile.tokenCatalog.authoredEmission === "inert-only" &&
+      nativeEmissionSupported &&
       profile.variableBinding.typedUsageTypes.includes("string") &&
       profile.moduleVariations.applicationScopes.includes("module") &&
       profile.moduleVariations.outputSurfaces.includes("html") &&

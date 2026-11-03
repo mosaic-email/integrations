@@ -120,7 +120,26 @@
               }
             },
             "authoredEmission": {
-              "const": "inert-only"
+              "enum": [
+                "inert-only",
+                "allowlisted-native-tokens"
+              ]
+            },
+            "nativeEmissionTokens": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 7,
+              "items": {
+                "enum": [
+                  "%%emailaddr%%",
+                  "%%_subscriberkey%%",
+                  "%%__AdditionalEmailAttribute1%%",
+                  "%%__AdditionalEmailAttribute2%%",
+                  "%%__AdditionalEmailAttribute3%%",
+                  "%%__AdditionalEmailAttribute4%%",
+                  "%%__AdditionalEmailAttribute5%%"
+                ]
+              }
             }
           },
           "additionalProperties": false
