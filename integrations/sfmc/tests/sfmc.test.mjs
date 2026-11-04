@@ -51,7 +51,7 @@ test("release descriptor matches pinned package identities and host compatibilit
   assert.equal(release.publisherKey, "lockidynamics")
   assert.equal(release.packageKey, "emailformat")
   assert.equal(release.catalogSlug, "sfmc-format")
-  assert.equal(release.version, "1.15.0")
+  assert.equal(release.version, "1.60.0")
   assert.equal(release.mosaicCompatibility.minimumVersion, support.minimumMosaicVersion)
   assert.ok(compareVersions(release.mosaicCompatibility.minimumVersion, support.previousExternalMosaicMinimumVersion) >= 0)
   assert.equal(release.compilerCompatibility.minimumVersion, support.minimumCompilerVersion)

@@ -1,3 +1,10 @@
+# 1.60.0 — 2026-11-03
+
+- Publish a maintenance baseline for the reviewed SFMC connected-operation workflow; preserve the 1.15.0 Worker, native-token behavior, and operation-schema bytes.
+- Document accompanying host repairs for recipient response completeness, SOAP read-error classification, and the existing optional image-folder destination in manual Push to SFMC.
+- Clarify metadata-only refresh, transient preview, shared Enterprise ownership, and delivery recovery boundaries using concepts from the reviewed open-source tools, without adding dependencies or copying source.
+- Requires Mosaic ≥0.0.5 and compiler bridge ≥160. Host repairs require separate Mosaic deployment; package update alone does not deploy them. No new migration or historical-artifact rewrite.
+
 # 1.15.0
 
 - Declare a bounded native system-token emission list for email address, subscriber key, and Additional Email Attributes 1–5. Unknown provider tokens remain unsupported.
